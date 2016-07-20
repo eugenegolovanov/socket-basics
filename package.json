@@ -1,0 +1,11 @@
+{
+  "name": "socketbasics",
+  "version": "1.0.0",
+  "description": "first socket simple project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "eugene",
+  "license": "ISC"
+}
