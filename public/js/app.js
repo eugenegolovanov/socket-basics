@@ -10,6 +10,9 @@
  	//listen to the custom 'message' event that we created at server.js
  	 socket.on('message', function (message) {
 	 	console.log('Message text: ' + message.text);
+
+	 	//Appending messages into div
+	 	jQuery('.messages').append('<p>' + message.text + '</p>');
  	});
 
 
