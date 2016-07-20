@@ -1,6 +1,4 @@
 	var socket = io();//io() - function defined in socket.io-x.x.x.js file
- 	// socket.connect('http://localhost:3011');
-
 
  	//listen to the 'connect' event. when we connected to server
  	socket.on('connect', function () {
@@ -35,9 +33,6 @@ $form.on('submit', function (event) {
 	$messageField.val("");
 
 	// var text = $('#textField').val();
-	// console.log('----------------------------------------------------');
-	// console.log('Text: ' + text);
-	// console.log('----------------------------------------------------');
 	// $('#textField').val("");
 
 });
