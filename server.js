@@ -6,11 +6,11 @@ var io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'));
 
-//listen
+//io.on - this callback listens events with one 'socket' connection
 io.on('connection', function (socket) {
 	console.log('User connected via socket.io');
 
-	//listen
+	//listen any 'message' events
 	socket.on('message', function (message) {
 		console.log('Message received: ' + message.text);
 
@@ -22,10 +22,10 @@ io.on('connection', function (socket) {
 
 
 
-	//socket emit - emits the custom event, 'message' - custom name of the event
-	socket.emit('message', {
-		text: 'Welcome to chat app'
-	});
+	// //socket emit - emits the custom event, 'message' - custom name of the event
+	// socket.emit('message', {
+	// 	text: 'Welcome to chat app'
+	// });
 });
 
 
