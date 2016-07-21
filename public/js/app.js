@@ -9,8 +9,12 @@
  	 socket.on('message', function (message) {
 	 	console.log('Message text: ' + message.text);
 
+	 	//TIMESTAMP
+		var timestampMoment = moment().utc(message.timestamp);//timestamp value to moment
+		var dateString = timestampMoment.format('h:mm:ss a');//moment formatted string
+
 	 	//Appending messages into div
-	 	jQuery('.messages').append('<p>' + message.text + '</p>');
+	 	jQuery('.messages').append('<p><strong>' + dateString + '</strong> ' + message.text + '</p>');
  	});
 
 
@@ -26,7 +30,8 @@ $form.on('submit', function (event) {
 
 	//Sending message with text extracted from form
 	socket.emit('message' , {
-		text: $messageField.val() //.val() pull value out and return it as string
+		text: $messageField.val(), //.val() pull value out and return it as string
+		timestamp: moment().format('x')//timestamp in miliseconds
 	});
 
 	//Make field empty
