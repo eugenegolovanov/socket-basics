@@ -28,6 +28,7 @@ io.on('connection', function (socket) {
 	
 	//socket emit - emits the custom event, 'message' - custom name of the event
 	socket.emit('message', {
+		name: 'System',
 		text: 'Welcome to chat app',
 		timestamp: moment().format('x')
 	});
