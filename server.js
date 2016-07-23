@@ -9,9 +9,11 @@ app.use(express.static(__dirname + '/public'));
 
 var clientInfo = {};
 
+
 //io.on - this callback listens events with one 'socket' connection
 io.on('connection', function (socket) {
 	console.log('User connected via socket.io');
+
 
 	//listen if someone joins a room, and send message only to members of this room
 	socket.on('joinRoom', function (req) {
@@ -28,6 +30,9 @@ io.on('connection', function (socket) {
 		});
 	});
 
+
+
+
 	//listen any 'message' events
 	socket.on('message', function (message) {
 		console.log('Message received: ' + message.text);
@@ -40,9 +45,6 @@ io.on('connection', function (socket) {
 		io.to(clientInfo[socket.id].room).emit('message', message); //sending to room member only
 
 	});
-
-
-
 
 	
 	//socket emit - emits the custom event, 'message' - custom name of the event
