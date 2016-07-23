@@ -1,12 +1,13 @@
 	//http://localhost:3000/?name=euge&room=LOT%20Fans
 	var name = getQueryVariable('name') || 'Anonymous';
-	var room = getQueryVariable('room');
+	var room = getQueryVariable('room') || 'Empty Chatroom';
 
 	//SOCKET
 	var socket = io();//io() - function defined in socket.io-x.x.x.js file
 
-	
- 	console.log(name + ' wants to join ' + room);
+	//chatroom header
+	jQuery('.room-title').text(room);
+
 
  	//listen to the 'connect' event. when we connected to server
  	socket.on('connect', function () {
