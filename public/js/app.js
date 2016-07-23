@@ -12,6 +12,12 @@
  	//listen to the 'connect' event. when we connected to server
  	socket.on('connect', function () {
 	 	console.log('Connected with socket');
+
+	 	//generating Room wich user picked
+	 	socket.emit('joinRoom', {
+	 		name:name,
+	 		room:room
+	 	});
  	});
 
  	//listen to the custom 'message' event that we created at server.js
@@ -19,8 +25,8 @@
 	 	console.log('Message text: ' + message.text);
 
 	 	//TIMESTAMP
-		var timestampMoment = moment().utc(message.timestamp);//timestamp value to moment
-		var dateString = timestampMoment.format('h:mm:ss a');//moment formatted string
+		var timestampMoment = moment.utc(message.timestamp);//timestamp value to moment
+		var dateString = timestampMoment.local().format('h:mm:ss a');//moment formatted string
 
 	    //Appending messages into div
 	 	var $message = jQuery('.messages');//getting text from textField
@@ -45,7 +51,7 @@ $form.on('submit', function (event) {
 	socket.emit('message' , {
 		name: name,
 		text: $messageField.val(), //.val() pull value out and return it as string
-		timestamp: moment().format('x')//timestamp in miliseconds
+		timestamp: moment().valueOf()//timestamp in miliseconds
 	});
 
 	//Make field empty
