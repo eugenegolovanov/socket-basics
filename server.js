@@ -10,9 +10,27 @@ app.use(express.static(__dirname + '/public'));
 var clientInfo = {};
 
 
-//io.on - this callback listens events with one 'socket' connection
+//io.on - this callback listens events with one 'socket' connection, 'connection' - builtin event
 io.on('connection', function (socket) {
 	console.log('User connected via socket.io');
+
+	//listen if user is disconnects, 'disconnect' - builtin event
+	socket.on('disconnect', function () {
+		var userData = clientInfo[socket.id];
+		if (typeof userData !== 'undefined') {
+			socket.leave(userData.room);//user left room
+
+			//send message to all user of chatroom that user left chatroom
+			io.to(userData.room).emit('message', {
+				name: 'System',
+				text: userData.name + ' left chatroom',
+				timestamp: moment().valueOf()
+			});
+			//delete user info
+			delete clientInfo[socket.id];
+
+		}
+	});
 
 
 	//listen if someone joins a room, and send message only to members of this room
