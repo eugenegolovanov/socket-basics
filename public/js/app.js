@@ -14,6 +14,7 @@
 	 	console.log('Connected with socket');
 
 	 	//generating Room wich user picked
+	 	//AND creating sustom info about socket connection, then we can catch it with 'socket.id'
 	 	socket.emit('joinRoom', {
 	 		name:name,
 	 		room:room
